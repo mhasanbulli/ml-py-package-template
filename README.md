@@ -24,7 +24,8 @@ uvx cookiecutter https://github.com/mhasanbulli/ml-py-package-template
 ## Template Variables
 
 - `project_name`: Human-readable name of your project
-- `project_slug`: Machine-readable name (automatically generated from project_name)
+- `repo_name`: Repository/folder name with dashes (automatically generated from project_name)
+- `project_slug`: Machine-readable name with underscores (automatically generated from project_name)
 - `package_name`: Python package name (automatically generated from project_slug)
 - `author_name`: Your name
 - `author_email`: Your email address
