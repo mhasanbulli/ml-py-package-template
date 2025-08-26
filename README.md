@@ -36,18 +36,17 @@ uvx cookiecutter https://github.com/mhasanbulli/ml-py-package-template
 
 ## What's Included
 
-- Modern `pyproject.toml` configuration with **compatible release versioning**
+- `pyproject.toml` configuration with compatible release versioning
 - Basic package structure with `__init__.py`
-- Sample main module with type hints
-- Comprehensive `.gitignore` for Python projects
-- Basic test structure with pytest
-- Development dependencies (pytest, ruff, pyright, pre-commit)
-- **Jupyter notebook support** for research and experimentation
+- Main module with type hints
+- `.gitignore` for Python projects
+- Test structure with pytest
+- Development dependencies: pytest, ruff, pyright, pre-commit
+- Jupyter notebook support
 - Example notebook with dependency setup instructions
-- Notebook dependencies (JupyterLab, matplotlib, seaborn, plotly)
-- **Git hooks** for code quality (pre-commit and manual options)
-- **Stable dependency management** using `~=` versioning for predictable builds
-- Professional README template
+- Git hooks for code quality (pre-commit and manual)
+- Makefile with tasks: install, test, lint, format, clean
+- README template
 
 ## Testing the Template
 
@@ -86,8 +85,7 @@ All testing is done with uv for fast and reliable dependency management.
 
 The template includes a GitHub Actions workflow that automatically:
 - **Validates** the template structure
-- **Tests** on multiple operating systems (Ubuntu, macOS, Windows)
-- **Tests** on multiple Python versions (3.12, 3.13)
+- **Tests** on Ubuntu with Python 3.12
 - **Generates** test projects and runs their full test suites
 - **Lints** template files using ruff
 
