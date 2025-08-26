@@ -46,9 +46,15 @@ all = [
 requires = ["setuptools~=75.0", "wheel~=0.44.0"]
 build-backend = "setuptools.build_meta"
 
+[tool.setuptools.packages.find]
+include = ["{{ cookiecutter.package_name }}*"]
+exclude = ["tests*", "notebooks*", "hooks*"]
+
 [tool.ruff]
 line-length = 120
 target-version = "py{{ cookiecutter.python_version.replace('.', '') }}"
+
+[tool.ruff.lint]
 select = [
     "E",  # pycodestyle errors
     "W",  # pycodestyle warnings

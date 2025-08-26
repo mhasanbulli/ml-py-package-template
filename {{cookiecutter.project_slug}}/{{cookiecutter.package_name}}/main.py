@@ -11,7 +11,7 @@ __email__ = "{{ cookiecutter.author_email }}"
 
 def main() -> None:
     """Main entry point for {{ cookiecutter.project_name }}."""
-    print(f"Hello from {{ cookiecutter.project_name }}!")
+    print("Hello from {{ cookiecutter.project_name }}!")
     print(f"Version: {__version__}")
 
 

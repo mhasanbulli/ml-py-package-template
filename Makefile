@@ -13,17 +13,17 @@ generate: ## Generate a test project from the template
 	@echo '{"project_name": "Test ML Package", "author_name": "Test Author", "author_email": "test@example.com", "description": "A test ML package", "version": "0.1.0", "python_version": "3.12", "license": "MIT"}' > test_config.json
 	@uvx cookiecutter . --no-input --config-file test_config.json --output-dir ./test_output
 	@rm test_config.json
-	@echo "✅ Test project generated in ./test_output/test_ml_package/"
+	@echo "✅ Test project generated in ./test_output/my_ml_package/"
 
 test: ## Run tests on the generated project
 	@echo "🧪 Testing generated project..."
-	@cd test_output/test_ml_package && uv venv
-	@cd test_output/test_ml_package && uv add --dev -e .
-	@cd test_output/test_ml_package && uv run python -c "import test_ml_package; test_ml_package.main()"
-	@cd test_output/test_ml_package && uv run pytest
-	@cd test_output/test_ml_package && uv run ruff check .
-	@cd test_output/test_ml_package && uv run ruff format --check .
-	@cd test_output/test_ml_package && uv run pyright
+	@cd test_output/my_ml_package && uv venv
+	@cd test_output/my_ml_package && uv sync --native-tls --all-extras
+	@cd test_output/my_ml_package && uv run python -c "import my_ml_package; my_ml_package.main()"
+	@cd test_output/my_ml_package && uv run pytest
+	@cd test_output/my_ml_package && uv run ruff check .
+	@cd test_output/my_ml_package && uv run ruff format .
+	@cd test_output/my_ml_package && uv run pyright
 	@echo "✅ Generated project tests passed!"
 
 lint: ## Lint the template files
