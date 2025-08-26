@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Pre-push hook to run linting and basic validation
+# Install with: cp hooks/pre-push .git/hooks/pre-push && chmod +x .git/hooks/pre-push
+
+set -e
+
+echo "🔍 Running pre-push checks..."
+
+# Check if we're in a git repository
+if ! git rev-parse --git-dir > /dev/null 2>&1; then
+    echo "❌ Not in a git repository"
+    exit 1
+fi
+
+# Run ruff linting
+echo "🔧 Running ruff linting..."
+if command -v uv >/dev/null 2>&1; then
+    uv run ruff check .
+    uv run ruff format --check .
+else
+    echo "⚠️  uv not found, skipping ruff checks"
+fi
+
+# Run type checking
+echo "🔍 Running type checking..."
+if command -v uv >/dev/null 2>&1; then
+    uv run pyright
+else
+    echo "⚠️  uv not found, skipping type checking"
+fi
+
+# Run tests
+echo "🧪 Running tests..."
+if command -v uv >/dev/null 2>&1; then
+    uv run pytest
+else
+    echo "⚠️  uv not found, skipping tests"
+fi
+
+echo "✅ All pre-push checks passed!"
