@@ -11,7 +11,7 @@ all: clean generate test clean ## Run full template test suite
 generate: ## Generate a test project from the template
 	@echo "🔄 Generating test project..."
 	@echo '{"project_name": "Test ML Package", "author_name": "Test Author", "author_email": "test@example.com", "description": "A test ML package", "version": "0.1.0", "python_version": "3.12", "license": "MIT"}' > test_config.json
-	@uvx cookiecutter . --no-input --config-file test_config.json --output-dir ./test_output
+	@uvx --native-tls cookiecutter . --no-input --config-file test_config.json --output-dir ./test_output
 	@rm test_config.json
 	@echo "✅ Test project generated in ./test_output/my-ml-package/"
 
