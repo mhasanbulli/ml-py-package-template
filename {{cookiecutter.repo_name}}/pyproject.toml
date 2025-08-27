@@ -48,7 +48,7 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 include = ["{{ cookiecutter.package_name }}*"]
-exclude = ["tests*", "notebooks*", "hooks*"]
+exclude = ["tests*", "notebooks*"]
 
 [tool.ruff]
 line-length = 120

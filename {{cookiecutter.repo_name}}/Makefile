@@ -1,9 +1,12 @@
-.PHONY: help install clean test lint format pyright check pre-commit-install jupyter notebook
+.PHONY: help dev install clean test lint format pyright check pre-commit-install jupyter notebook
 
 # Default target
 help: ## Show this help message
 	@echo "Available targets:"
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-20s\033[0m %s\n", $$1, $$2}'
+
+dev: install ## Set up development environment (install + pre-commit hooks)
+	@echo "✅ Development environment ready!"
 
 install: pre-commit-install ## Install the package with all dependencies
 	uv venv
@@ -42,8 +45,8 @@ pyright: ## Run type checking
 
 check: lint format-check pyright ## Run all checks (lint, format, type)
 
-pre-commit-install: ## Install pre-commit hooks
-	uv run pre-commit install
+pre-commit-install: ## Install pre-push hooks
+	uv run pre-commit install --hook-type pre-push
 
 jupyter: ## Start Jupyter Lab
 	uv run jupyter lab
