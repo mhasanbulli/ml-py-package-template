@@ -10,37 +10,24 @@ authors = [
 license = { text = "{{ cookiecutter.license }}" }
 dependencies = []
 
-[project.optional-dependencies]
+[dependency-groups]
+all = [
+    {include-group = "dev"},
+    {include-group = "notebooks"},
+]
+
 dev = [
     "pytest~=7.4.0",
     "ruff~=0.6.0",
-    "pyright~=1.1.380",
-    "pre-commit~=3.8.0",
+    "pyright~=1.1.403",
+    "pre-commit~=3.8.0"
 ]
+
 notebooks = [
-    "jupyter~=1.1.0",
     "jupyterlab~=4.2.0",
-    "ipykernel~=6.29.0",
-    "matplotlib~=3.9.0",
-    "seaborn~=0.13.0",
-    "plotly~=5.24.0",
-    "nbformat~=5.10.0",
+    "matplotlib~=3.9.0"
 ]
-all = [
-    # Development dependencies
-    "pytest~=7.4.0",
-    "ruff~=0.6.0",
-    "pyright~=1.1.380",
-    "pre-commit~=3.8.0",
-    # Notebook dependencies
-    "jupyter~=1.1.0",
-    "jupyterlab~=4.2.0",
-    "ipykernel~=6.29.0",
-    "matplotlib~=3.9.0",
-    "seaborn~=0.13.0",
-    "plotly~=5.24.0",
-    "nbformat~=5.10.0",
-]
+
 
 [build-system]
 requires = ["setuptools~=75.0", "wheel~=0.44.0"]
@@ -52,7 +39,7 @@ exclude = ["tests*", "notebooks*"]
 
 [tool.ruff]
 line-length = 120
-target-version = "py{{ cookiecutter.python_version.replace('.', '') }}"
+
 
 [tool.ruff.lint]
 select = [
@@ -73,7 +60,6 @@ skip-magic-trailing-comma = false
 line-ending = "auto"
 
 [tool.pyright]
-pythonVersion = "{{ cookiecutter.python_version }}"
 include = ["{{ cookiecutter.package_name }}"]
 exclude = ["**/node_modules", "**/__pycache__"]
 reportMissingImports = true
