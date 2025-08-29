@@ -1,14 +1,11 @@
-.PHONY: help dev install clean test lint format pyright check pre-commit-install jupyter notebook
+.PHONY: help install clean test pre-commit jupyter notebook
 
 # Default target
 help: ## Show this help message
 	@echo "Available targets:"
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
-dev: install ## Set up development environment (install + pre-commit hooks)
-	@echo "✅ Development environment ready!"
-
-install: pre-commit-install ## Install the package with all dependencies
+install: pre-commit ## Install the package with all dependencies
 	uv venv
 	uv sync --all-extras
 
@@ -21,8 +18,6 @@ clean: ## Clean up build artifacts and virtual environment
 	rm -rf .ruff_cache/
 	rm -rf .mypy_cache/
 	rm -rf .venv/
-	find . -type d -name __pycache__ -delete
-	find . -type f -name "*.pyc" -delete
 	@echo "✅ Cleanup completed"
 
 test: ## Run tests
@@ -31,22 +26,20 @@ test: ## Run tests
 test-coverage: ## Run tests with coverage report
 	uv run pytest --cov={{ cookiecutter.package_name }} --cov-report=html --cov-report=term
 
-lint: ## Run linting checks
-	uv run ruff check .
+check: export SKIP=test ## Run format, lint and type check
+check: hooks
 
-format: ## Format code
-	uv run ruff format .
-
-format-check: ## Check if code is formatted
-	uv run ruff format --check .
+format: export SKIP=test,pyright ## Run format and lint
+format: hooks
 
 pyright: ## Run type checking
-	uv run pyright
+	PYRIGHT_PYTHON_IGNORE_WARNINGS=1 uv run pyright
 
-check: lint format-check pyright ## Run all checks (lint, format, type)
+hooks: ## Run pre-commit git hooks on all files
+	uv run pre-commit run --color=always --all-files --hook-stage pre-push
 
-pre-commit-install: ## Install pre-push hooks
-	uv run pre-commit install --hook-type pre-push
+pre-commit: ## Install pre-push hooks
+	uv run pre-commit install --install-hooks -t pre-push
 
 jupyter: ## Start Jupyter Lab
 	uv run jupyter lab
