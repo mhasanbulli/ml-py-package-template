@@ -9,7 +9,6 @@ install: pre-commit ## Install the package with all dependencies
 	uv sync --all-extras
 
 clean: ## Clean up build artifacts and virtual environment
-	@echo "🧹 Cleaning up..."
 	rm -rf build/
 	rm -rf dist/
 	rm -rf *.egg-info/
@@ -17,7 +16,6 @@ clean: ## Clean up build artifacts and virtual environment
 	rm -rf .ruff_cache/
 	rm -rf .mypy_cache/
 	rm -rf .venv/
-	@echo "✅ Cleanup completed"
 
 test: ## Run tests
 	uv run pytest

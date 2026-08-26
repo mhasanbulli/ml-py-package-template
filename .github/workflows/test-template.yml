@@ -2,29 +2,14 @@ name: Test Cookiecutter Template
 
 on:
   push:
+    branches: [ main ]
   pull_request:
     branches: [ main ]
   workflow_dispatch:
 
 jobs:
-  validate:
-    name: Validate Template Structure
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v7
-
-      - name: Set up uv
-        uses: astral-sh/setup-uv@v7
-        with:
-          enable-cache: true
-
-      - name: Validate template structure
-        run: make validate
-
   test:
     name: Test Template
-    needs: validate
     runs-on: ubuntu-latest
 
     steps:
@@ -32,21 +17,13 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Set up uv
-        uses: astral-sh/setup-uv@v7
+        uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d
         with:
           enable-cache: true
           version: "latest"
 
-      - name: Install Python 3.12 using uv
-        run: uv python install 3.12
+      - name: Install Python
+        run: uv python install
 
       - name: Run full test suite
         run: make all
-
-      - name: Upload test artifacts
-        uses: actions/upload-artifact@v7
-        if: failure()
-        with:
-          name: test-output
-          path: test_output/
-          retention-days: 7

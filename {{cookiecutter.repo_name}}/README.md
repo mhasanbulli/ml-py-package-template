@@ -12,21 +12,6 @@ make dev
 make install
 ```
 
-## Development Commands
-
-This project includes a Makefile with common development tasks:
-
-```bash
-make install          # Install package with all dependencies
-make test             # Run tests
-make test-coverage    # Run tests with coverage report
-make check            # Run format, lint and type check
-make format           # Run format and lint
-make pyright          # Run type checking
-make hooks            # Run pre-commit git hooks on all files
-make clean            # Clean up build artifacts and virtual environment
-```
-
 To see the full list, issue `make help` in your terminal.
 
 ## Jupyter Notebooks
