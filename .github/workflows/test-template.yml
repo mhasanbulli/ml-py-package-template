@@ -2,6 +2,7 @@ name: Test Cookiecutter Template
 
 on:
   push:
+    branches: [ main ]
   pull_request:
     branches: [ main ]
   workflow_dispatch:
@@ -16,13 +17,13 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Set up uv
-        uses: astral-sh/setup-uv@v7
+        uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d
         with:
           enable-cache: true
           version: "latest"
 
-      - name: Install Python 3.12 using uv
-        run: uv python install 3.12
+      - name: Install Python
+        run: uv python install
 
       - name: Run full test suite
         run: make all
