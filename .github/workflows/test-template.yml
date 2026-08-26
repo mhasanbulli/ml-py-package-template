@@ -7,24 +7,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  validate:
-    name: Validate Template Structure
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v7
-
-      - name: Set up uv
-        uses: astral-sh/setup-uv@v7
-        with:
-          enable-cache: true
-
-      - name: Validate template structure
-        run: make validate
-
   test:
     name: Test Template
-    needs: validate
     runs-on: ubuntu-latest
 
     steps:
@@ -42,11 +26,3 @@ jobs:
 
       - name: Run full test suite
         run: make all
-
-      - name: Upload test artifacts
-        uses: actions/upload-artifact@v7
-        if: failure()
-        with:
-          name: test-output
-          path: test_output/
-          retention-days: 7

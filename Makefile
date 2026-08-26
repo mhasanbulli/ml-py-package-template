@@ -1,4 +1,4 @@
-.PHONY: help all generate test clean lint validate
+.PHONY: help all generate test clean
 
 # Default target
 help: ## Show this help message
